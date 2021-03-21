@@ -1,0 +1,9 @@
+node_modules
+client
+
+.env
+.env.local
+.env.development
+.env.production
+
+config.js

@@ -1,0 +1,20 @@
+{
+  "editor.fontSize": 16,
+  "terminal.integrated.fontSize": 16,
+  "window.zoomLevel": 0,
+  "todohighlight.keywords": [
+    "DEBUG",
+    "REVIEW",
+    {
+      "text": "TODO:",
+      "color": "white",
+      "border": "1px solid white",
+      "borderRadius": "2px",
+      "backgroundColor": "rgba(0,0,0,.2)"
+    }
+  ],
+  "todohighlight.defaultStyle": {
+    "color": "#FFFFFF",
+    "backgroundColor": "#FFAB00"
+  }
+}
