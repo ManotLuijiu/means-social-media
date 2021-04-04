@@ -4,9 +4,11 @@ const mongoose = require('mongoose');
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, label, printf } = format;
 
+require('dotenv').config();
+
 const resolvers = require('./graphql/resolvers');
 const typeDefs = require('./graphql/typeDefs');
-const { MONGODB } = require('./config');
+// const { MONGODB } = require('./config');
 
 const pubsub = new PubSub();
 
@@ -39,9 +41,9 @@ if (process.env.NODE_ENV !== 'production') {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  cache: new RedisCache({
-    host: process.env.redisServer,
-  }),
+  // cache: new RedisCache({
+  //   host: process.env.redisServer,
+  // }),
   // cache: new RedisCache({
   //   sentinels: [
   //     {
@@ -57,7 +59,10 @@ const server = new ApolloServer({
 });
 
 mongoose
-  .connect(MONGODB, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.MONGODB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     logger.info(`MongoDb connected.`);
     return server.listen({ port: PORT });
