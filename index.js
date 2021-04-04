@@ -1,4 +1,5 @@
 const { ApolloServer, PubSub } = require('apollo-server');
+const { RedisCache } = require('apollo-server-cache-redis');
 const mongoose = require('mongoose');
 const winston = require('winston');
 
@@ -31,6 +32,20 @@ if (process.env.NODE_ENV !== 'production') {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  cache: new RedisCache({
+    host: process.env.redisServer,
+  }),
+  // cache: new RedisCache({
+  //   sentinels: [
+  //     {
+  //       host: process.env.redisServer,
+  //       port: process.env.redisPort,
+  //     },
+  //   ],
+  //   password: process.env.redisPassword,
+  //   name: process.env.redisName,
+  //   // Options are passed through to the Redis client
+  // }),
   context: ({ req }) => ({ req, pubsub }),
 });
 
